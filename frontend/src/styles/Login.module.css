@@ -1,15 +1,17 @@
 .page {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem;
     transition: all var(--transition-speed);
+    background-image: url("background.png");
+    background-size: cover;
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 1rem;
     flex: 1;
     width: 100%;
@@ -17,13 +19,6 @@
 
 .logo {
     height: 2rem;
-}
-
-.or_container {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
 }
 
 .form {
@@ -35,6 +30,30 @@
 .btn_google {
     background-color: var(--bg-secondary);
     border: 1px solid var(--bg-primary-tint);
+    padding: 10px 20px;
+    font-size: 16px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_google svg {
+    font-size: 30px; 
+}
+
+.btn_discord{
+    background-color: #5865f2;
+    border: 1px solid var(--bg-primary-tint);
+    color: white; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_discord svg {
+    font-size: 30px; /* Makes the icon larger */
 }
 
 .btn_google:hover {
@@ -49,10 +68,4 @@
 
 .btn_login:hover {
     background-color: var(--blue-tint);
-}
-
-.forgot_pass_link {
-    font-weight: 400;
-    color: #0066ff;
-    margin-top: 1rem;
 }

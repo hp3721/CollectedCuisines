@@ -62,16 +62,22 @@ h2 {
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  position: static;
+  top: 10;
+  width: 50vw; /* 50% of the viewport width */
+  height: 95vh; 
+  text-align: center; /* Center text horizontally */
   background-color: var(--bg-secondary);
   border-radius: var(--br);
   padding: 2rem;
-  width: 100%;
-  max-width: 500px;
   transition: all var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  justify-content: center;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 3; /* Make sure it appears above other content */
 }
 
 @media (max-width: calc(500px + 2rem)) {

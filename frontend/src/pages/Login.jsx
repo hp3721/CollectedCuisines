@@ -1,6 +1,8 @@
 // package imports
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { FcGoogle } from "react-icons/fc";
+import { FaDiscord } from "react-icons/fa";
 // style imports
 import styles from "../styles/Login.module.css";
 // API imports
@@ -12,10 +14,7 @@ const Login = () => {
     const { login } = usePocket();
 
     // local state
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''); 
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);   
+  
 
     // functions
 
@@ -47,56 +46,24 @@ const Login = () => {
         }
     }
 
+
     return (
-        <div className={`${styles.page} page`}>
-            <div className={styles.content}>
-                <h1>App Name</h1>
-                <div className={`card`}>
-                    <h1 style={{width: "100%"}}>Login</h1>
-                    <button className={`${styles.btn_google} btn_large`}>
+            <div className={`${styles.page} page h-screen grid grid-cols-2`}>
+                <div className={styles.content}>
+                    <div className={`card`}>
+                        <h1 style={{width: "100%"}}>Collected Cuisine</h1>
+                        <h1 style={{width: "100%"}}>Login</h1>
+                        <button className={`${styles.btn_google} btn_large`}>
+                        <FcGoogle style={{ marginRight: "8px"}} /> 
                         Continue with Google
-                    </button>
-
-                    <div className={styles.or_container}>
-                        <hr />
-                        <p>or</p>
-                        <hr />
-                    </div>
-
-                    <form onSubmit={handleSubmit} className={styles.form} action="">
-                        <label htmlFor="email" className="input_label">Email address</label>
-                        <input 
-                            type="email" 
-                            placeholder="Enter your email..."
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                                setError('');
-                            }}
-                            required />
-
-                        <label htmlFor="password" className="input_label">Password</label>
-                        <input 
-                            type="password" 
-                            placeholder="Enter your password..."
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                                setError('');
-                            }}
-                            required />
-
-                        <p className="error">{error}</p>
-
-                        <a className={styles.forgot_pass_link} href="#forgotpass">Forgot password?</a>
-
-                        <button 
-                            className={`${styles.btn_login} ${styles.auth_btn} btn_large`} >
-                            {loading ? 'Loging in ...' : 'Log in'}
                         </button>
-                    </form>
-                    <p>Don't have an account? <a href="/signup">Sign up</a></p>                    
+                        <button className={`${styles.btn_discord} btn_large`}>
+                        <FaDiscord style={{ marginRight: "8px"}} /> 
+                        Continue with Discord
+                        </button>        
+                    </div>
                 </div>
             </div>     
-        </div>
     );
 }
 
