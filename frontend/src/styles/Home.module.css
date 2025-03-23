@@ -17,7 +17,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    /* max-height: 40%; */
+}
+
+.static_recipe_card {
+    border: 2px solid #e1e1e1;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: scenter;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* max-height: 40%; */
 }
 
 .recipe_card:hover {
@@ -32,9 +48,16 @@
 }
 
 .recipe_card p {
+    display: -webkit-box;
+    /* flex-grow: 1; */
     font-size: 1rem;
     color: #555;
     line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 4.5em;
 }
 
 .recipe_add {
@@ -71,20 +94,20 @@
     justify-content: center;
   }
   
-  .recipe_add_popup h2 {
+.recipe_add_popup h2 {
     font-size: 2rem; /* Larger font size for the title */
     margin-bottom: 20px; /* More spacing */
     color: #333; /* Same text color */
-  }
+}
   
-  .recipe_add_popup p {
+.recipe_add_popup p {
     font-size: 1.2rem; /* Larger font size for the description */
     color: #555; /* Same text color */
     line-height: 1.6; /* Slightly larger line height */
     margin-bottom: 20px; /* More spacing */
-  }
-  
-  .recipe_add_popup button {
+}
+
+.recipe_add_popup button {
     padding: 10px 20px; /* Button padding */
     font-size: 1rem; /* Button font size */
     background-color: #277DA1; /* Primary color for the button */
@@ -93,11 +116,11 @@
     border-radius: 8px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
     transition: background-color 0.3s ease; /* Smooth transition */
-  }
-  
-  .recipe_add_popup button:hover {
+}
+
+.recipe_add_popup button:hover {
     background-color: #1c5a7a; /* Darker shade on hover */
-  }
+}
 
 .background_blur {
     width: 100%;
