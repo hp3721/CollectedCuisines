@@ -36,3 +36,68 @@
     color: #555;
     line-height: 1.5;
 }
+
+.recipe_add {
+    font-family: arial;
+    font-size: 35px;
+    background-color: #666;
+    border: 5px solid #555;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    width:70px;
+    aspect-ratio: 1 / 1;
+}
+
+.recipe_add_popup {
+    width: 500px;
+    height: 300px;
+    background-color: #666;
+    border-radius: 5%;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.background_blur {
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    right: 0%;
+    bottom: 0%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(25px);
+}
+
+.head_bar {
+    background-color: #277DA1;
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+
+}
+.head_bar > div {
+    font-size: 45px;
+    line-height: 70px;
+}
+
+
+.head_bar_user {
+    line-height: 70px;
+    display:flex;
+    justify-content: right;
+    font-size: 30px;
+    padding-left: 10px;
+}
+
+.head_bar_user > button {
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+.my_recipe {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
