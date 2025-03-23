@@ -1,47 +1,23 @@
 import Pocketbase from 'pocketbase';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 const BASE_URL = import.meta.env.VITE_PB_URI;
 
-// create the pb context
 const PbContext = createContext();
 
 export const PbProvider = ({ children }) => {
-    // define the pb object 
     const pb = useMemo(() => new Pocketbase(BASE_URL));
 
-    // define user
     const [user, setUser] = useState(pb.authStore.record);
-    const [token, setToken] = useState(pb.authStore.token)
+    const [token, setToken] = useState(pb.authStore.token);
+    const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-        if (pb.authStore.isValid) {
-            // refresh auth token
-            pb.collection("users").authRefresh();
-        }
-        
-        // listen for changes to the authStore state
-        const unsubscribe = pb.authStore.onChange((token, record) => {
-            setUser(record);
-            setToken(token);
-        });
-        
-        return () => {
-            unsubscribe();
-        };
-    }, [pb.authStore.record]);
-
-
-    // ========= AUTH ==============
-
-    const googleAuth = async () => {
-        const res = await pb.collection('users').authWithOAuth2({ provider: 'google' });
-    }
-
-    const login = async (email, pass) => {
-        // attempt to login user
+    const discordAuth = async () => {
         try {
-            await pb.collection("users").authWithPassword(email, pass);
+            const res = await pb.collection('users').authWithOAuth2({ 
+                provider: 'discord',
+                scopes:   ["identify", "email"] 
+            });
             setUser(pb.authStore.record);
             return null;
         }
@@ -50,19 +26,17 @@ export const PbProvider = ({ children }) => {
             return err;
         }
     }
-
-    const signup = async (data) => {
-        // attempt to register user
+    
+    const googleAuth = async () => {
         try {
-            const res = await pb.collection("users").create(data);
-
-            // log in user
-            await login(data.email, data.password);
-            
+            const res = await pb.collection('users').authWithOAuth2({ 
+                provider: 'google'
+            });
+            setUser(pb.authStore.record);
             return null;
         }
         catch (err) {
-            console.log(err.data)
+            console.log(err);
             return err;
         }
     }
@@ -70,25 +44,40 @@ export const PbProvider = ({ children }) => {
     const logout = () => {
         try {
             pb.authStore.clear();
-            setUser(pb.authStore.record);
+            pb.collection("users").authRefresh();
+            setUser(undefined);
+            window.location.href = '/'; 
         }
         catch (err) {
             console.log(err);
         }
     }
 
+    const fetchUserAndRecipes = async () => {
+        try {
+            if (user == null) return;
+
+            const records = await pb.collection("users").getOne(user.id, {
+                expand: 'recipes'
+            });
+            setRecipes(records.expand?.recipes || []);
+        } catch (err) {
+            console.error("Error fetching user recipe data:", err);
+        }
+    };
+
     return (
         <PbContext.Provider value={{ 
             user,
+            recipes,
+            discordAuth,
             googleAuth,
-            login,
             logout,
-            signup,
+            fetchUserAndRecipes
          }}>
         {children}
         </PbContext.Provider>
     );
 }
 
-// export custom hook to simplify using useContext
 export const usePocket = () => useContext(PbContext);

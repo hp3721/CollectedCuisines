@@ -1,8 +1,25 @@
 .page {
-    flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 1rem;
-    transition: all var(--transition-speed);
+    transition: none;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("images/backgrounds/1.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: -1;
 }
 
 .content {
@@ -11,48 +28,51 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    flex: 1;
+    flex-grow: 1;
     width: 100%;
+    transition: none;
 }
 
-.logo {
-    height: 2rem;
-}
+/* Hide the logo on smaller screens */
+@media (max-width: 768px) {
+    .content:last-child {
+        display: none;
+    }
 
-.or_container {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    .content:first-child {
+        max-width: 100%;
+    }
 }
 
 .btn_google {
     background-color: var(--bg-secondary);
     border: 1px solid var(--bg-primary-tint);
+    padding: 10px 20px;
+    font-size: 16px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn_google:hover {
     background-color: var(--bg-primary);
 }
 
-.btn_login {
-    background-color: var(--blue);
-    color: white;
-    margin-top: 1rem;
+.btn_google svg {
+    font-size: 30px; 
 }
 
-.btn_login:hover {
-    background-color: var(--blue-tint);
+.btn_discord{
+    background-color: #5865f2;
+    border: 1px solid var(--bg-primary-tint);
+    color: white; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.forgot_pass_link {
-    font-weight: 400;
-    color: #0066ff;
-    margin-top: 1rem;
+.btn_discord svg {
+    font-size: 30px;
 }
