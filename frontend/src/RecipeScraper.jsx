@@ -1,5 +1,4 @@
 import Pocketbase from 'pocketbase';
-import { scrapeRecipeFromClipboard, pushtoTable } from './Scrapers';
 import { createContext, useContext, useMemo, useState } from 'react';
 
 const BASE_URL = import.meta.env.VITE_PB_URI;
@@ -8,7 +7,6 @@ const PbContext = createContext();
 
 export const PbProvider = ({ children }) => {
     const pb = useMemo(() => new Pocketbase(BASE_URL));
-    pb.autoCancellation(false);
 
     const [user, setUser] = useState(pb.authStore.record);
     const [token, setToken] = useState(pb.authStore.token);
@@ -61,25 +59,15 @@ export const PbProvider = ({ children }) => {
         return pb.getFileUrl(user, user.avatar);
     }
 
-    const fetchRecipes = async () => {
+    const fetchUserAndRecipes = async () => {
         try {
             if (user == null) return;
             const records = await pb.collection("users").getOne(user.id, {
-                expand: 'recipes,recipes.ingredients'
+                expand: 'recipes'
             });
             setRecipes(records.expand?.recipes || []);
         } catch (err) {
             console.error("Error fetching user recipe data:", err);
-        }
-    };
-
-    const scrapeAndSaveRecipe = async () => {
-        try {
-            const scraper = await scrapeRecipeFromClipboard();
-            await pushtoTable(pb, user, scraper);
-            await fetchRecipes();
-        } catch (error) {
-            console.error('Error scraping and saving recipe:', error);
         }
     };
 
@@ -90,9 +78,8 @@ export const PbProvider = ({ children }) => {
             discordAuth,
             googleAuth,
             logout,
-            fetchRecipes,
-            getAvatarUrl,
-            scrapeAndSaveRecipe
+            fetchUserAndRecipes,
+            getAvatarUrl
          }}>
         {children}
         </PbContext.Provider>
