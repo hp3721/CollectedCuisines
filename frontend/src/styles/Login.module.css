@@ -1,3 +1,90 @@
+.h {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 2;
+}
+
+.card {
+    position: static;
+    top: 10;
+    width: 50vw;
+    height: 95vh; 
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    transition: 0.05;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: center;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 93vw;
+    }
+}
+
+.button {
+    border: none;
+    font-family: '-apple-system', system-ui;
+    background-color: #e6ebf0;
+}
+
+@media (hover:hover) {
+    .button:hover {
+        cursor: pointer;
+        background-color: #d4d8dc;
+    }
+}
+
+.btn_large {
+    height: 48px;
+    font-size: 18px;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #d4d8dc;
+}
+
+/* .btn_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    height: fit-content;
+    padding: 0.3rem;
+    border-radius: 8px;
+    background-color: transparent;
+} */
+
+/* @media (hover:hover) {
+    .btn_icon:hover {
+        background-color: #d4d8dc;
+    }
+} */
+
+/*  */
+
 .page {
     display: flex;
     min-height: 100vh;
@@ -45,8 +132,8 @@
 }
 
 .btn_google {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--bg-primary-tint);
+    background-color: white;
+    border: 1px solid #d4d8dc;
     padding: 10px 20px;
     font-size: 16px; 
     display: flex;
@@ -55,7 +142,7 @@
 }
 
 .btn_google:hover {
-    background-color: var(--bg-primary);
+    background-color: #e6ebf0;
 }
 
 .btn_google svg {
@@ -64,7 +151,7 @@
 
 .btn_discord{
     background-color: #5865f2;
-    border: 1px solid var(--bg-primary-tint);
+    border: 1px solid #d4d8dc;
     color: white; 
     padding: 10px 20px; 
     font-size: 16px;

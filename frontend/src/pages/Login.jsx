@@ -11,13 +11,13 @@ const Login = () => {
     return (
         <div className={styles.page}>
             <div className={styles.content}>
-                <div className={`card`}>
-                    <h1 style={{ width: "100%" }}>Collected Cuisines</h1>
-                    <button onClick={googleAuth} className={`${styles.btn_google} btn_large`}>
+                <div className={styles.card}>
+                    <h1 style={{ width: "100%" }} className={styles.h}>Collected Cuisines</h1>
+                    <button onClick={googleAuth} className={`${styles.button} ${styles.btn_google} ${styles.btn_large}`}>
                         <FcGoogle style={{ marginRight: "8px" }} />
                         Continue with Google
                     </button>
-                    <button onClick={discordAuth} className={`${styles.btn_discord} btn_large`}>
+                    <button onClick={discordAuth} className={`${styles.button} ${styles.btn_discord} ${styles.btn_large}`}>
                         <FaDiscord style={{ marginRight: "8px" }} />
                         Continue with Discord
                     </button>
